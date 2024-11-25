@@ -9,6 +9,9 @@ let data = {
   address: '123 Main St, New York, NY 10001'
 };
 
+// Middleware
+app.use(express.json());
+
 // Website endpoints
 app.get('/', (req, res) => {
   console.log('GET /');
@@ -59,7 +62,31 @@ app.get('/api/:key', (req, res) => {
 app.post('/api', (req, res) => {
   console.log('POST /api');
   const newData = req.body;
+  data = { ...data, ...newData };
   res.status(201).send('Created new data');
+});
+
+app.put('/api/:key', (req, res) => {
+  const key = req.params.key;
+  console.log(`PUT /api/${key}`);
+
+  if (data[key]) {
+    data[key] = req.body.value;
+    res.send(`Updated ${key}`);
+  } else {
+    res.status(404).send('Key not found');
+  }
+});
+
+app.delete('/api/:key', (req, res) => {
+  const key = req.params.key;
+  console.log(`DELETE /api/${key}`);
+  if (data[key]) {
+    delete data[key];
+    res.send('Deleted data');
+  } else {
+    res.status(404).send('Key not found');
+  }
 });
 
 // Start the server

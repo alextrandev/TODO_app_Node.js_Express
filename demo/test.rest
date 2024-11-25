@@ -17,3 +17,14 @@ Content-Type: application/json
   "email": "test@test.com",
   "address": "1234 Test St"
 }
+
+### TEST PUT /api API
+PUT http://localhost:3000/api/name
+Content-Type: application/json
+
+{
+  "value": "Jason Doe"
+}
+
+### TEST DELETE /api/email API
+DELETE http://localhost:3000/api/email
