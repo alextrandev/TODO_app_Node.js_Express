@@ -56,7 +56,11 @@ app.get('/api/:key', (req, res) => {
 });
 
 // CRUD Endpoints
-
+app.post('/api', (req, res) => {
+  console.log('POST /api');
+  const newData = req.body;
+  res.status(201).send('Created new data');
+});
 
 // Start the server
 app.listen(PORT, () => {

@@ -6,3 +6,14 @@ GET http://localhost:3000/dashboard
 
 ### TEST GET /api API
 GET http://localhost:3000/api
+
+### TEST POST /api API
+POST http://localhost:3000/api
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "age": 30,
+  "email": "test@test.com",
+  "address": "1234 Test St"
+}
