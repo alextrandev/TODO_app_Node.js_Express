@@ -15,18 +15,26 @@ app.get('/', (req, res) => {
   res.send(
     `
     <h1>Hello world</h1>
-    <button><a href="/dashboard">Dashboard</a></button>
+    <button><a href="/edit">Edit data</a></button>
+    <button>Go to <a href="/api">API</a></button>
+    <h2>Data</h2>
+    <code>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    </code>
     `
   )
 });
 
-app.get('/dashboard', (req, res) => {
-  console.log('GET /dashboard');
+app.get('/edit', (req, res) => {
+  console.log('GET /edit');
   res.send(
     `
-    <h1>Dashboard</h1>
+    <h1>Edit data</h1>
     <button>Go to <a href="/">Home</a></button>
-    <button>Go to <a href="/api">API</a></button>
+    <h2>Data</h2>
+    <code>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    </code>
     `
   )
 });
@@ -46,6 +54,9 @@ app.get('/api/:key', (req, res) => {
     res.status(404).send('Key not found');
   }
 });
+
+// CRUD Endpoints
+
 
 // Start the server
 app.listen(PORT, () => {
