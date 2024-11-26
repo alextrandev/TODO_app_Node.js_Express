@@ -1,12 +1,17 @@
 {
   "name": "todo_app_node.js_express",
   "version": "1.0.0",
-  "description": "",
+  "description": "Full stack todo app using Nodejs, SQLite db and JWT authentication",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
 }
