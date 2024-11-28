@@ -8,8 +8,17 @@ const router = express.Router();
 // register as new user
 router.post('/register', async (req, res) => {
   const {username, password} = req.body;
-  console.log(username, password);
-  res.sendStatus(201);
+
+  // save to db
+  try {
+    // hash the password
+    const hashedPassword = bcrypts.hashSync(password, 8);
+    console.log(username, hashedPassword);
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err.message);
+    res.sendStatus(503);
+  }
 });
 
 // login as existing user
