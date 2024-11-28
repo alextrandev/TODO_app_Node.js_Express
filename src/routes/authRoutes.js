@@ -5,12 +5,18 @@ import db from '../db.js';
 
 const router = express.Router();
 
+// register as new user
 router.post('/register', async (req, res) => {
-  // register as new user
+  const {username, password} = req.body;
+  console.log(username, password);
+  res.sendStatus(201);
 });
 
+// login as existing user
 router.post('/login', async (req, res) => {
-  // login as existing user
+  const {username, password} = req.body;
+  console.log(username, password);
+  res.sendStatus(200);
 });
 
 export default router;
