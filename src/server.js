@@ -1,6 +1,8 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5004;
@@ -12,11 +14,18 @@ const __dirname = dirname(__filename);
 
 // Middleware
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.json());
 
 // Website routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+// Auth routes
+app.use('/auth', authRoutes);
+
+// TODO list routes
+app.use('/todos', todoRoutes);
 
 // Start the server
 app.listen(PORT, () => {
