@@ -10,6 +10,24 @@ Content-Type: application/json
   "password": "password"
 }
 
+### Login with invalid user endpoint /auth/login
+POST http://localhost:5003/auth/login
+Content-Type: application/json
+
+{
+  "username": "test2@test.com",
+  "password": "password"
+}
+
+### Login with incorrect pw endpoint /auth/login
+POST http://localhost:5003/auth/login
+Content-Type: application/json
+
+{
+  "username": "test@test.com",
+  "password": "password2"
+}
+
 ### Login as existing user endpoint /auth/login
 POST http://localhost:5003/auth/login
 Content-Type: application/json
