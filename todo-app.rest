@@ -36,3 +36,32 @@ Content-Type: application/json
   "username": "test@test.com",
   "password": "password"
 }
+
+### Fetch all todos endpoint /todos (protected) without token
+GET http://localhost:5003/todos
+
+### Fetch all todos endpoint /todos (protected) with invalid token
+GET http://localhost:5003/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2MTI4LCJleHAiOjE3MzQyNTI1Mjh9.ZhZpIq1D0wd2ph8WC7Uch8RDzcWrvKwsHuspAgFALSE
+
+### Fetch all todos endpoint /todos (protected) with valid token
+GET http://localhost:5003/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2MTI4LCJleHAiOjE3MzQyNTI1Mjh9.ZhZpIq1D0wd2ph8WC7Uch8RDzcWrvKwsHuspAgO6mUE
+
+### Create a new todo endpoint /todos (protected) with invalid token
+POST http://localhost:5003/todos
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2MTI4LCJleHAiOjE3MzQyNTI1Mjh9.ZhZpIq1D0wd2ph8WC7Uch8RDzcWrvKwsHuspAgFALSE
+
+{
+  "task" : "Buy milk"
+}
+
+### Create a new todo endpoint /todos (protected) with valid token
+POST http://localhost:5003/todos
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2MTI4LCJleHAiOjE3MzQyNTI1Mjh9.ZhZpIq1D0wd2ph8WC7Uch8RDzcWrvKwsHuspAgO6mUE
+
+{
+  "task" : "Buy milk"
+}
