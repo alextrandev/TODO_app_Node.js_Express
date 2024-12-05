@@ -51,6 +51,18 @@ router.put('/:id', (req, res) => {
 
 // delete todo task
 router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { userId } = req;
+
+  const deleteTodo = db.prepare(`DELETE FROM todos WHERE id = ? AND user_id = ?`);
+
+  const result = deleteTodo.run(id, userId);
+
+  if (result.changes === 0) {
+    return res.status(500).json({ error: 'Failed to delete todo' });
+  }
+
+  return res.json({ id });
 });
 
 export default router;
