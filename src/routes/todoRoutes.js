@@ -31,8 +31,20 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
-  // update todo task
+router.put('/:id', (req, res) => {
+  const { completed } = req.body;
+  const { id } = req.params;
+  const { userId } = req;
+
+  const updatedTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`);
+
+  const result = updatedTodo.run(completed ? 1 : 0, id);
+
+  if (result.changes === 0) {
+    return res.status(500).json({ error: 'Failed to update todo' });
+  }
+
+  return res.json({ id, completed: completed });
 });
 
 router.delete('/:id', async (req, res) => {
