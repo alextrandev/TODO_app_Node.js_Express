@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
   });
 });
 
+// update todo task
 router.put('/:id', (req, res) => {
   const { completed } = req.body;
   const { id } = req.params;
@@ -38,6 +39,7 @@ router.put('/:id', (req, res) => {
 
   const updatedTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`);
 
+  // sqlite error if use the TRUE/FALSE value directly
   const result = updatedTodo.run(completed ? 1 : 0, id);
 
   if (result.changes === 0) {
@@ -47,8 +49,8 @@ router.put('/:id', (req, res) => {
   return res.json({ id, completed: completed });
 });
 
+// delete todo task
 router.delete('/:id', async (req, res) => {
-  // delete todo task
 });
 
 export default router;
