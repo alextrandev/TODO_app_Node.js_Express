@@ -74,3 +74,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2
 {
   "completed" : true
 }
+
+### Delete a todo endpoint /todos/:id (protected)
+DELETE http://localhost:5003/todos/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0MTY2MTI4LCJleHAiOjE3MzQyNTI1Mjh9.ZhZpIq1D0wd2ph8WC7Uch8RDzcWrvKwsHuspAgO6mUE
