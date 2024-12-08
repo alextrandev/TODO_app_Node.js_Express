@@ -1,1 +1,1 @@
-# TODO_app_Node.js_Express
+# TODO App that uses a Node.js backend, PostgreSQL db, Prisma ORM and JWT Authentication

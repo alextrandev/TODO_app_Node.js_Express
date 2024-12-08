@@ -1,7 +1,7 @@
 {
   "name": "todo_app_node.js_express",
   "version": "1.0.0",
-  "description": "Full stack todo app using Nodejs, SQLite db and JWT authentication",
+  "description": "TODO App that uses a Node.js backend, PostgreSQL db, Prisma ORM and JWT Authenticationn",
   "main": "index.js",
   "type": "module",
   "scripts": {
