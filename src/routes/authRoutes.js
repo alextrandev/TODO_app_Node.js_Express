@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypts from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../db.js';
+import prisma from '../prismaClient.js';
 
 const router = express.Router();
 
@@ -13,23 +14,25 @@ router.post('/register', async (req, res) => {
 
   // save to db
   try {
-    const insertUser = db.prepare(`
-      INSERT INTO users (username, password)
-      VALUES (?, ?)
-    `);
-    const result = insertUser.run(username, hashedPassword);
+    // create new user
+    const user = await prisma.user.create({
+      data: {
+        username: username,
+        password: hashedPassword
+      }
+    })
 
-    // add a default todo task
-    const defaultTodo = "Add your first todo task!";
-    const insertTodo = db.prepare(`
-      INSERT INTO todos (task, user_id)
-      VALUES (?, ?)
-    `);
-    insertTodo.run(defaultTodo, result.lastInsertRowid);
+    // create a default todo task
+    const defaultTodo = await prisma.todo.create({
+      data: {
+        task: 'Create your first todo!',
+        userID: user.id
+      }
+    })
 
     // create a token
     const token = jwt.sign(
-      { id: result.lastInsertRowid },
+      { id: user.id },
       process.env.JWT_SECRET,
       { expiresIn: 86400 },
     );
