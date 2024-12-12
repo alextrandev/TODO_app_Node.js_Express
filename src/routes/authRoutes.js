@@ -20,15 +20,15 @@ router.post('/register', async (req, res) => {
         username: username,
         password: hashedPassword
       }
-    })
+    });
 
     // create a default todo task
-    const defaultTodo = await prisma.todo.create({
+    await prisma.todo.create({
       data: {
         task: 'Create your first todo!',
         userID: user.id
       }
-    })
+    });
 
     // create a token
     const token = jwt.sign(
