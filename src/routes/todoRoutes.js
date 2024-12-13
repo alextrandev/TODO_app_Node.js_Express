@@ -21,11 +21,11 @@ router.post('/', async (req, res) => {
 
   const newTodo = await prisma.todo.create({
     data: {
-      task,
+      task, // same as task: task
       userId
     }
   });
-
+  // not sure if this works... maybe refactor and use try catch instead
   if (!newTodo) {
     return res.status(500).json({ error: 'Failed to add new todo' });
   }
@@ -41,7 +41,7 @@ router.put('/:id', async (req, res) => {
 
   const updatedTodo = await prisma.todo.update({
     where: {
-      id: parseInt(id),
+      id: parseInt(id), // because params are strings
       userId
     },
     data: {
