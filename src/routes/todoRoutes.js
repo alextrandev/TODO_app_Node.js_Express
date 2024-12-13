@@ -21,8 +21,8 @@ router.post('/', async (req, res) => {
 
   const newTodo = await prisma.todo.create({
     data: {
-      task: task,
-      userId: userId
+      task,
+      userId
     }
   });
 
@@ -30,11 +30,7 @@ router.post('/', async (req, res) => {
     return res.status(500).json({ error: 'Failed to add new todo' });
   }
 
-  return res.json({
-    id: newTodo.id,
-    task,
-    completed: newTodo.completed
-  });
+  return res.json(newTodo);
 });
 
 // update todo task
@@ -46,7 +42,7 @@ router.put('/:id', async (req, res) => {
   const updatedTodo = await prisma.todo.update({
     where: {
       id: parseInt(id),
-      userId: userId
+      userId
     },
     data: {
       completed: !!completed // convert to boolean
@@ -57,7 +53,7 @@ router.put('/:id', async (req, res) => {
     return res.status(500).json({ error: 'Failed to update todo' });
   }
 
-  return res.json({ id: id, completed: !!completed });
+  return res.json(updatedTodo);
 });
 
 // delete todo task
@@ -65,18 +61,14 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
 
-  const deleteTodo = await prisma.todo.delete({
+  await prisma.todo.delete({
     where: {
       id: parseInt(id),
-      userId: userId
+      userId
     }
   });
 
-  if (!deleteTodo) {
-    return res.status(500).json({ error: 'Failed to delete todo' });
-  }
-
-  return res.json({ id: id });
+  return res.json({ id });
 });
 
 export default router;
