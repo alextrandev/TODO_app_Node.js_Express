@@ -38,21 +38,26 @@ router.post('/', async (req, res) => {
 });
 
 // update todo task
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   const { completed } = req.body;
   const { id } = req.params;
   const { userId } = req;
 
-  const updatedTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`);
+  const updatedTodo = await prisma.todo.update({
+    where: {
+      id: parseInt(id),
+      userId: userId
+    },
+    data: {
+      completed: !!completed // convert to boolean
+    }
+  });
 
-  // sqlite error if use the TRUE/FALSE value directly
-  const result = updatedTodo.run(completed ? 1 : 0, id);
-
-  if (result.changes === 0) {
+  if (!updatedTodo) {
     return res.status(500).json({ error: 'Failed to update todo' });
   }
 
-  return res.json({ id, completed: completed });
+  return res.json({ id: id, completed: !!completed });
 });
 
 // delete todo task
@@ -60,15 +65,18 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const { userId } = req;
 
-  const deleteTodo = db.prepare(`DELETE FROM todos WHERE id = ? AND user_id = ?`);
+  const deleteTodo = await prisma.todo.delete({
+    where: {
+      id: parseInt(id),
+      userId: userId
+    }
+  });
 
-  const result = deleteTodo.run(id, userId);
-
-  if (result.changes === 0) {
+  if (!deleteTodo) {
     return res.status(500).json({ error: 'Failed to delete todo' });
   }
 
-  return res.json({ id });
+  return res.json({ id: id });
 });
 
 export default router;
