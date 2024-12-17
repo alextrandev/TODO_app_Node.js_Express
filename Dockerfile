@@ -1,6 +1,9 @@
 # Use official node.js runtime as base image
 FROM node:22-alpine
 
+# to solve OpenSSL issue when building the container: Error: Could not parse schema engine response: SyntaxError: Unexpected token 'E', "Error load"... is not valid JSON
+RUN apk add --no-cache openssl
+
 # Set the working directory in the container
 WORKDIR /app
 
