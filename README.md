@@ -41,6 +41,11 @@ OR use the todo-app.rest (with VS Code's extension `REST Client`) to test
 - Delete all container when done with the project `docker system prune`
 
 ## Screenshot
+**Login**
+![Login interface](public/screenshots/login.png)
+
+**Todo list**
+![Todo list](public/screenshots/todo-list.png)
 
 ## Authors and acknowledgment
 
